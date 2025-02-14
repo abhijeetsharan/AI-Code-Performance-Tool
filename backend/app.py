@@ -3,7 +3,7 @@ from flask_cors import CORS
 from performance_analysis import analyze_code
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
@@ -16,4 +16,5 @@ def analyze():
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    from os import environ
+    app.run(host="0.0.0.0", port=int(environ.get("PORT", 5000)))
